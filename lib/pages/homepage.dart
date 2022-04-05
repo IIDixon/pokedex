@@ -227,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                         height: 200,
                         alignment: Alignment.center,
                         child: const CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
                           strokeWidth: 5,
                         ),
                       );
