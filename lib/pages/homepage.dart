@@ -47,8 +47,10 @@ class _HomePageState extends State<HomePage> {
 
   void setPokemon(String text){
     setState(() {
-      namePokemon = text;
-      pokeRepository.savePokemon(namePokemon!);
+      if(text != null && text.isNotEmpty){
+        namePokemon = text;
+        pokeRepository.savePokemon(namePokemon!);
+      }
     });
   }
 
@@ -73,6 +75,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Container(
                 decoration: BoxDecoration(
+                  color: Colors.lightBlueAccent,
                   border: Border.all(
                     color: Colors.green,
                     width: 2,
@@ -83,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                   placeholder: kTransparentImage,
                   image: url,
                   height: 300,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 )
               ),
               Padding(
@@ -111,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text("Elemental: ", style: TextStyle(color: Colors.green, fontSize: 22),),
+                    const Text("Type: ", style: TextStyle(color: Colors.green, fontSize: 22),),
                     Expanded(
                       child: Container(
                         decoration: const BoxDecoration(
@@ -174,90 +177,111 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 12, 8, 12),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    onSubmitted: setPokemon,
-                    style: const TextStyle(
-                      fontSize: 22,
-                    ),
-                    controller: searchController,
-                    decoration: const InputDecoration(
-                      labelText: 'Nome do Pokémon',
-                      labelStyle: TextStyle(
-                        color: Colors.green,
+      body: GestureDetector(
+        onTap: (){
+          FocusScopeNode currentFocus = FocusScope.of(context);
+
+          if(!currentFocus.hasPrimaryFocus){
+            currentFocus.unfocus();
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(8, 12, 8, 12),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      onSubmitted: (text){
+                        if(text != null && text.isNotEmpty){
+                          setPokemon(text);
+                        }
+                      },
+                      style: const TextStyle(
                         fontSize: 22,
                       ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
+                      controller: searchController,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          splashColor: Colors.red.withOpacity(0.3),
+                            onPressed: (){
+                              searchController.clear();
+                            },
+                            icon: const Icon(Icons.close, color: Colors.red,),),
+                        labelText: 'Nome do Pokémon',
+                        labelStyle: const TextStyle(
                           color: Colors.green,
+                          fontSize: 22,
                         ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
+                        enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Colors.greenAccent,
-                          )
+                            color: Colors.green,
+                          ),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.greenAccent,
+                            )
+                        ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 5),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: const Size.fromHeight(58),
-                    primary: Colors.green,
+                  const SizedBox(width: 5),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: const Size.fromHeight(58),
+                      primary: Colors.green,
+                    ),
+                    onPressed: (){
+                      if(searchController.text != null && searchController.text.isNotEmpty){
+                        setState(() {
+                          namePokemon = searchController.text;
+                        });
+                      }
+                    },
+                    child: const Icon(Icons.search),
                   ),
-                  onPressed: (){
-                    setState(() {
-                      namePokemon = searchController.text;
-                    });
-                  },
-                  child: const Icon(Icons.search),
-                ),
-              ],
-            ),
-            Expanded(
-              child: FutureBuilder(
-                future: getPokemon(),
-                builder: (context,snapshot){
-                  switch(snapshot.connectionState){
-                    case ConnectionState.waiting:
-                    case ConnectionState.none:
-                      return Container(
-                        width: 200,
-                        height: 200,
-                        alignment: Alignment.center,
-                        child: const CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-                          strokeWidth: 5,
-                        ),
-                      );
-                    default:
-                      if(snapshot.hasError){
+                ],
+              ),
+              Expanded(
+                child: FutureBuilder(
+                  future: getPokemon(),
+                  builder: (context,snapshot){
+                    switch(snapshot.connectionState){
+                      case ConnectionState.waiting:
+                      case ConnectionState.none:
                         return Container(
                           width: 200,
                           height: 200,
                           alignment: Alignment.center,
-                          child: Column(
-                            children: const [
-                              Icon(Icons.error),
-                              Text("Nenhum pokémon encontrado com o nome digitado"),
-                            ],
+                          child: const CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                            strokeWidth: 5,
                           ),
                         );
-                      } else{
-                        return createDataPokemon(context,snapshot);
-                      }
+                      default:
+                        if(snapshot.hasError){
+                          return Container(
+                            width: 200,
+                            height: 200,
+                            alignment: Alignment.center,
+                            child: Column(
+                              children: const [
+                                Icon(Icons.error),
+                                Text("Nenhum pokémon encontrado com o nome digitado"),
+                              ],
+                            ),
+                          );
+                        } else{
+                          return createDataPokemon(context,snapshot);
+                        }
+                    }
                   }
-                }
-              ),
-            )
-          ],
+                ),
+              )
+            ],
+          ),
         ),
       )
     );
