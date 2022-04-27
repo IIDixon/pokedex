@@ -272,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                             child: Column(
                               children: const [
                                 Icon(Icons.error),
-                                Text("Nenhum pokémon encontrado com o nome digitado"),
+                                Text("No pokemon found with this name"),
                               ],
                             ),
                           );
