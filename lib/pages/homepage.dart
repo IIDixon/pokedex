@@ -277,12 +277,14 @@ class _HomePageState extends State<HomePage> {
                             ),
                           );
                         } else{
+
                           poke = Pokemon.fromApi(snapshot);
                           return createDataPokemon(context,poke);
                         }
                     }
                   }
                 ),
+
               ),
             ],
           ),
