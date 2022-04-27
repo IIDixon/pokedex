@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class Pokemon{
-  Pokemon({required this.name});
+  Pokemon.setName({required this.name});
 
   Pokemon.up({required this.name, this.hp,this.speed, this.def, this.attack });
 
@@ -16,7 +16,7 @@ class Pokemon{
         img = json.data["sprites"]["other"]["official-artwork"]["front_default"];
 
   String? img;
-  String name;
+  String? name;
   String? element;
   int? hp;
   int? speed;

@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(5),
-                          child: Text(pokemon.name.toUpperCase(), style: const TextStyle(color: Colors.green, fontSize: 22,),textAlign: TextAlign.center,),
+                          child: Text(pokemon.name!.toUpperCase(), style: const TextStyle(color: Colors.green, fontSize: 22,),textAlign: TextAlign.center,),
                         ),
                       ),
                     ),
@@ -283,7 +283,7 @@ class _HomePageState extends State<HomePage> {
                     }
                   }
                 ),
-              )
+              ),
             ],
           ),
         ),
