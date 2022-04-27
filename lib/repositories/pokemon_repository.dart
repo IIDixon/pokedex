@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:pokedex/models/pokemon.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class pokemonRepository{
+class PokemonRepository{
   late SharedPreferences sharedPreferences;
 
   Future<String> getPokemonSaved() async{
