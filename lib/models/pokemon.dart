@@ -1,13 +1,26 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mobx/mobx.dart';
 
-class Pokemon{
-  Pokemon.setName({required this.name});
+part 'pokemon.g.dart';
 
-  Pokemon.up({required this.name, this.hp,this.speed, this.def, this.attack });
+class Pokemon = _Pokemon with _$Pokemon;
 
-  Pokemon.fromJson(Map<String, dynamic> json) : name = json["name"];
+abstract class _Pokemon with Store{
+  _Pokemon.setName({required this.name});
 
-  Pokemon.fromApi(AsyncSnapshot json) : name = json.data["name"],
+  _Pokemon();
+
+  _Pokemon.up({required this.name, this.hp,this.speed, this.def, this.attack });
+
+  _Pokemon.fromJson(Map<String, dynamic> json) : name = json["name"],
+        hp = json["stats"][0]["base_stat"],
+        speed = json["stats"][5]["base_stat"],
+        def = json["stats"][2]["base_stat"],
+        attack = json["stats"][1]["base_stat"],
+        element = json["types"][0]["type"]["name"],
+        img = json["sprites"]["other"]["official-artwork"]["front_default"];
+
+  _Pokemon.fromApi(AsyncSnapshot json) : name = json.data["name"],
         hp = json.data["stats"][0]["base_stat"],
         speed = json.data["stats"][5]["base_stat"],
         def = json.data["stats"][2]["base_stat"],
@@ -18,10 +31,20 @@ class Pokemon{
   String? img;
   String? name;
   String? element;
+
+  @observable
   int? hp;
+
   int? speed;
   int? def;
   int? attack;
+
+  @action
+  void decrement(){
+    hp = hp! - 10;
+    print(name);
+    print(hp);
+  }
 
   Map<String, dynamic> toJson(){
     return {'name' : name};
