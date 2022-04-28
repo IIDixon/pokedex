@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pokedex/repositories/pokemon_repository.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../models/pokemon.dart';
 
@@ -20,9 +20,9 @@ class _HomePageState extends State<HomePage> {
   final PokemonRepository pokeRepository = PokemonRepository();
   final searchController = TextEditingController();
   final search = "https://pokeapi.co/api/v2/pokemon/";
-  String? namePokemon;
+  late String namePokemon;
 
-  late Pokemon poke;
+  Pokemon poke = Pokemon();
 
   Future<Map> getPokemon() async{
     http.Response response;
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     } else{
       response = await http.get(Uri.parse(search + namePokemon!));
     }*/
-    response = await http.get(Uri.parse(search + namePokemon!));
+    response = await http.get(Uri.parse(search + namePokemon));
     return json.decode(response.body);
   }
 
@@ -51,9 +51,13 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       if(text != null && text.isNotEmpty){
         namePokemon = text;
-        pokeRepository.savePokemon(namePokemon!);
+        pokeRepository.savePokemon(namePokemon);
       }
     });
+  }
+
+  void decPoke(){
+    poke.decrement();
   }
 
  Widget createDataPokemon(BuildContext context, Pokemon pokemon){
@@ -144,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                     Column(
                         children: [
                           const Icon(Icons.favorite, color: Colors.red, size: 40,),
-                          Text("HP - ${pokemon.hp}", style: const TextStyle(fontSize: 22, color: Colors.green ),),
+                          Observer(builder: (_) => Text('HP - ${pokemon.hp}', style: const TextStyle(fontSize: 22, color: Colors.green ),),),
                           Row(children:const [SizedBox(height: 25,)],),
                           const FaIcon(FontAwesomeIcons.fire, color: Colors.deepOrange, size: 38,),
                           Text("Attack - ${pokemon.attack}", style: const TextStyle(fontSize: 22, color: Colors.green),)
@@ -276,13 +280,17 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                           );
-                        } else{
+                        } else {
                           poke = Pokemon.fromApi(snapshot);
                           return createDataPokemon(context,poke);
                         }
                     }
                   }
                 ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(onPressed: decPoke, child: const Text('Decrement HP'),),
               ),
             ],
           ),
