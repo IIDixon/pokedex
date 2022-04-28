@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pokedex/repositories/pokemon_repository.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
+import 'dart:math';
 import '../models/pokemon.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,8 +21,9 @@ class _HomePageState extends State<HomePage> {
   final searchController = TextEditingController();
   final search = "https://pokeapi.co/api/v2/pokemon/";
   late String namePokemon;
-
   Pokemon poke = Pokemon();
+
+  final random = Random();
 
   Future<Map> getPokemon() async{
     http.Response response;
@@ -40,11 +41,14 @@ class _HomePageState extends State<HomePage> {
   void initState(){
     super.initState();
 
-    pokeRepository.getPokemonSaved().then((value){
+    setState(() {
+      namePokemon = random.nextInt(500).toString();
+    });
+    /*pokeRepository.getPokemonSaved().then((value){
       setState(() {
         namePokemon = value;
       });
-    });
+    });*/
   }
 
   void setPokemon(String text){
