@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
                   border: Border.all(
-                    color: Colors.green,
+                    color: Colors.deepPurple,
                     width: 2,
                   )
                 ),
@@ -100,15 +100,15 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text("Name: ", style: TextStyle(color: Colors.green, fontSize: 22),),
+                    const Text("Name: ", style: TextStyle(color: Colors.deepPurple, fontSize: 22),),
                     Expanded(
                       child: Container(
                         decoration: const BoxDecoration(
-                          border: Border(bottom: BorderSide(color: Colors.green, width: 1)),
+                          border: Border(bottom: BorderSide(color: Colors.deepPurple, width: 1)),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(5),
-                          child: Text(pokemon.name!.toUpperCase(), style: const TextStyle(color: Colors.green, fontSize: 22,),textAlign: TextAlign.center,),
+                          child: Text(pokemon.name!.toUpperCase(), style: const TextStyle(color: Colors.deepPurple, fontSize: 22,),textAlign: TextAlign.center,),
                         ),
                       ),
                     ),
@@ -120,15 +120,15 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text("Type: ", style: TextStyle(color: Colors.green, fontSize: 22),),
+                    const Text("Type: ", style: TextStyle(color: Colors.deepPurple, fontSize: 22),),
                     Expanded(
                       child: Container(
                         decoration: const BoxDecoration(
-                          border: Border(bottom: BorderSide(color: Colors.green, width: 1)),
+                          border: Border(bottom: BorderSide(color: Colors.deepPurple, width: 1)),
                         ),
                         child: Padding(
                             padding: const EdgeInsets.all(5),
-                            child: Text(pokemon.element!.toUpperCase(), style: const TextStyle(fontSize: 22, color: Colors.green),textAlign: TextAlign.center,),
+                            child: Text(pokemon.element!.toUpperCase(), style: const TextStyle(fontSize: 22, color: Colors.deepPurple),textAlign: TextAlign.center,),
                         ),
                       ),
                     ),
@@ -138,7 +138,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.green,
+                      color: Colors.deepPurple,
                       width: 2,
                     ),
                 ),
@@ -148,20 +148,20 @@ class _HomePageState extends State<HomePage> {
                     Column(
                         children: [
                           const Icon(Icons.favorite, color: Colors.red, size: 40,),
-                          Observer(builder: (_) => Text('HP - ${pokemon.hp}', style: const TextStyle(fontSize: 22, color: Colors.green ),),),
+                          Observer(builder: (_) => Text('HP - ${pokemon.hp}', style: const TextStyle(fontSize: 22, color: Colors.deepPurple ),),),
                           Row(children:const [SizedBox(height: 25,)],),
                           const FaIcon(FontAwesomeIcons.fire, color: Colors.deepOrange, size: 38,),
-                          Text("Attack - ${pokemon.attack}", style: const TextStyle(fontSize: 22, color: Colors.green),)
+                          Text("Attack - ${pokemon.attack}", style: const TextStyle(fontSize: 22, color: Colors.deepPurple),)
                         ],
                     ),
                     const SizedBox(width: 80,),
                     Column(
                       children: [
                         const Icon(Icons.speed, color: Colors.blueAccent, size: 40,),
-                        Text("Speed - ${pokemon.speed}", style: const TextStyle(fontSize: 22, color: Colors.green),),
+                        Text("Speed - ${pokemon.speed}", style: const TextStyle(fontSize: 22, color: Colors.deepPurple),),
                         Row(children:const [SizedBox(height: 25,)],),
                         const FaIcon(FontAwesomeIcons.shieldHeart, color: Colors.brown, size: 38),
-                        Text("Defense - ${pokemon.def}", style: const TextStyle(fontSize: 22, color: Colors.green),),
+                        Text("Defense - ${pokemon.def}", style: const TextStyle(fontSize: 22, color: Colors.deepPurple),),
                       ],
                     ),
                   ],
@@ -178,7 +178,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.deepPurple,
         title: const Text("Pokedex"),
         centerTitle: true,
       ),
@@ -218,17 +218,17 @@ class _HomePageState extends State<HomePage> {
                             icon: const Icon(Icons.close, color: Colors.red,),),
                         labelText: 'Name of Pokémon',
                         labelStyle: const TextStyle(
-                          color: Colors.green,
+                          color: Colors.deepPurple,
                           fontSize: 22,
                         ),
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Colors.green,
+                            color: Colors.deepPurple,
                           ),
                         ),
                         focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Colors.greenAccent,
+                              color: Colors.deepPurple,
                             )
                         ),
                       ),
@@ -238,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size.fromHeight(58),
-                      primary: Colors.green,
+                      primary: Colors.deepPurple,
                     ),
                     onPressed: (){
                       if(searchController.text != null && searchController.text.isNotEmpty){
@@ -263,21 +263,24 @@ class _HomePageState extends State<HomePage> {
                           height: 200,
                           alignment: Alignment.center,
                           child: const CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.deepPurple),
                             strokeWidth: 5,
                           ),
                         );
                       default:
                         if(snapshot.hasError){
-                          return Container(
-                            width: 200,
-                            height: 200,
-                            alignment: Alignment.center,
-                            child: Column(
-                              children: const [
-                                Icon(Icons.error),
-                                Text("No pokemon found with this name"),
-                              ],
+                          return Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: Container(
+                              width: 200,
+                              height: 200,
+                              alignment: Alignment.center,
+                              child: Column(
+                                children: const [
+                                  Icon(Icons.error),
+                                  Text("No pokemon found with this name"),
+                                ],
+                              ),
                             ),
                           );
                         } else{
