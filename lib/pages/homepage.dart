@@ -23,8 +23,6 @@ class _HomePageState extends State<HomePage> {
   late String namePokemon;
   Pokemon poke = Pokemon();
 
-  static const colorPrimary = Colors.deepPurple;
-
   final random = Random();
 
   Future<Map> getPokemon() async{
@@ -89,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
                   border: Border.all(
-                    color: colorPrimary,
+                    color: Theme.of(context).colorScheme.primary,
                     width: 2,
                   )
                 ),
@@ -106,15 +104,15 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text("Name: ", style: TextStyle(color: colorPrimary, fontSize: 22),),
+                    Text("Name: ", style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 22),),
                     Expanded(
                       child: Container(
-                        decoration: const BoxDecoration(
-                          border: Border(bottom: BorderSide(color: colorPrimary, width: 1)),
+                        decoration: BoxDecoration(
+                          border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1)),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(5),
-                          child: Text(pokemon.name!.toUpperCase(), style: const TextStyle(color: colorPrimary, fontSize: 22,),textAlign: TextAlign.center,),
+                          child: Text(pokemon.name!.toUpperCase(), style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 22,),textAlign: TextAlign.center,),
                         ),
                       ),
                     ),
@@ -126,15 +124,15 @@ class _HomePageState extends State<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text("Type: ", style: TextStyle(color: colorPrimary, fontSize: 22),),
+                    Text("Type: ", style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 22),),
                     Expanded(
                       child: Container(
-                        decoration: const BoxDecoration(
-                          border: Border(bottom: BorderSide(color: colorPrimary, width: 1)),
+                        decoration: BoxDecoration(
+                          border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1)),
                         ),
                         child: Padding(
                             padding: const EdgeInsets.all(5),
-                            child: Text(pokemon.element!.toUpperCase(), style: const TextStyle(fontSize: 22, color: colorPrimary),textAlign: TextAlign.center,),
+                            child: Text(pokemon.element!.toUpperCase(), style: TextStyle(fontSize: 22, color: Theme.of(context).colorScheme.primary),textAlign: TextAlign.center,),
                         ),
                       ),
                     ),
@@ -144,7 +142,7 @@ class _HomePageState extends State<HomePage> {
               Container(
                 decoration: BoxDecoration(
                     border: Border.all(
-                      color: colorPrimary,
+                      color: Theme.of(context).colorScheme.primary,
                       width: 2,
                     ),
                 ),
@@ -154,20 +152,20 @@ class _HomePageState extends State<HomePage> {
                     Column(
                         children: [
                           const Icon(Icons.favorite, color: Colors.red, size: 40,),
-                          Observer(builder: (_) => Text('HP - ${pokemon.hp}', style: const TextStyle(fontSize: 22, color: colorPrimary ),),),
+                          Observer(builder: (_) => Text('HP - ${pokemon.hp}', style:  TextStyle(fontSize: 22, color: Theme.of(context).colorScheme.primary),),),
                           Row(children:const [SizedBox(height: 25,)],),
                           const FaIcon(FontAwesomeIcons.fire, color: Colors.deepOrange, size: 38,),
-                          Text("Attack - ${pokemon.attack}", style: const TextStyle(fontSize: 22, color: colorPrimary),)
+                          Text("Attack - ${pokemon.attack}", style: TextStyle(fontSize: 22, color: Theme.of(context).colorScheme.primary),)
                         ],
                     ),
                     const SizedBox(width: 80,),
                     Column(
                       children: [
                         const Icon(Icons.speed, color: Colors.blueAccent, size: 40,),
-                        Text("Speed - ${pokemon.speed}", style: const TextStyle(fontSize: 22, color: colorPrimary),),
+                        Text("Speed - ${pokemon.speed}", style: TextStyle(fontSize: 22, color: Theme.of(context).colorScheme.primary),),
                         Row(children:const [SizedBox(height: 25,)],),
                         const FaIcon(FontAwesomeIcons.shieldHeart, color: Colors.brown, size: 38),
-                        Text("Defense - ${pokemon.def}", style: const TextStyle(fontSize: 22, color: colorPrimary),),
+                        Text("Defense - ${pokemon.def}", style: TextStyle(fontSize: 22, color: Theme.of(context).colorScheme.primary),),
                       ],
                     ),
                   ],
@@ -182,14 +180,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: colorPrimary,
-        title: const Text("Pokedex"),
-        centerTitle: true,
-      ),
-      backgroundColor: Colors.white,
-      body: GestureDetector(
+    return GestureDetector(
         onTap: (){
           FocusScopeNode currentFocus = FocusScope.of(context);
 
@@ -223,18 +214,18 @@ class _HomePageState extends State<HomePage> {
                             },
                             icon: const Icon(Icons.close, color: Colors.red,),),
                         labelText: 'Name of Pokémon',
-                        labelStyle: const TextStyle(
-                          color: colorPrimary,
+                        labelStyle: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
                           fontSize: 22,
                         ),
-                        enabledBorder: const OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: colorPrimary,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                         ),
-                        focusedBorder: const OutlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: colorPrimary,
+                              color: Theme.of(context).colorScheme.primary,
                             )
                         ),
                       ),
@@ -243,8 +234,8 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(width: 5),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      fixedSize: const Size.fromHeight(58),
-                      primary: colorPrimary,
+                      fixedSize: Size.fromHeight(58),
+                      primary: Theme.of(context).colorScheme.primary,
                     ),
                     onPressed: (){
                       if(searchController.text != null && searchController.text.isNotEmpty){
@@ -269,8 +260,8 @@ class _HomePageState extends State<HomePage> {
                           width: 200,
                           height: 200,
                           alignment: Alignment.center,
-                          child: const CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(colorPrimary),
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.primary),
                             strokeWidth: 5,
                           ),
                         );
@@ -306,7 +297,6 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-      )
-    );
+      );
   }
 }
