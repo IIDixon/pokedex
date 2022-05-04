@@ -147,7 +147,7 @@ class _BattlePageState extends State<BattlePage> {
             placeholder: kTransparentImage,
             image: pokemon.img!,
             height: 200,
-            width: 200,
+            width: 150,
             fit: BoxFit.fill,
           )
       ),
@@ -211,7 +211,7 @@ class _BattlePageState extends State<BattlePage> {
             Padding(
               padding: const EdgeInsets.only(top: 10,bottom: 10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   FutureBuilder(
                     future: getPokemonFirst(),
@@ -221,7 +221,7 @@ class _BattlePageState extends State<BattlePage> {
                         case ConnectionState.none:
                           return Container(
                             width: 150,
-                            height: 200,
+                            height: 150,
                             alignment: Alignment.center,
                             child: CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.primary),
@@ -231,8 +231,9 @@ class _BattlePageState extends State<BattlePage> {
                         default:
                           if(snapshot.hasError){
                             return Container(
-                              width: 150,
-                              height: 200,
+                              width: 100,
+                              height: 100,
+                              alignment: Alignment.center,
                               child: Column(
                                 children: const [
                                   Icon(Icons.error),
@@ -255,8 +256,8 @@ class _BattlePageState extends State<BattlePage> {
                         case ConnectionState.waiting:
                         case ConnectionState.none:
                           return Container(
-                            width: 150,
-                            height: 200,
+                            width: 100,
+                            height: 100,
                             alignment: Alignment.center,
                             child: CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.primary),
@@ -266,8 +267,8 @@ class _BattlePageState extends State<BattlePage> {
                         default:
                           if(snapshot.hasError){
                             return Container(
-                              width: 150,
-                              height: 200,
+                              width: 100,
+                              height: 100,
                               alignment: Alignment.center,
                               child: Column(
                                 children: const [
