@@ -40,10 +40,8 @@ abstract class _Pokemon with Store{
   int? attack;
 
   @action
-  void decrement(){
-    hp = hp! - 10;
-    print(name);
-    print(hp);
+  void decrement(int damage){
+    hp = hp! - damage;
   }
 
   Map<String, dynamic> toJson(){

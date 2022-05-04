@@ -28,11 +28,11 @@ mixin _$Pokemon on _Pokemon, Store {
       ActionController(name: '_Pokemon', context: context);
 
   @override
-  void decrement() {
+  void decrement(int damage) {
     final _$actionInfo =
         _$_PokemonActionController.startAction(name: '_Pokemon.decrement');
     try {
-      return super.decrement();
+      return super.decrement(damage);
     } finally {
       _$_PokemonActionController.endAction(_$actionInfo);
     }

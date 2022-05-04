@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void decPoke(){
-    poke.decrement();
+    poke.decrement(10);
   }
 
  Widget createDataPokemon(BuildContext context, Pokemon pokemon){
@@ -288,7 +288,6 @@ class _HomePageState extends State<HomePage> {
                     }
                   }
                 ),
-
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

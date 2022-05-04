@@ -119,8 +119,8 @@ class _BattlePageState extends State<BattlePage> {
     );
   }
 
-  Widget createPokemon(BuildContext context, AsyncSnapshot snapshot, Pokemon pokemon){
-    final url = snapshot.data!["sprites"]["other"]["official-artwork"]["front_default"];
+  Widget createPokemon(BuildContext context, Pokemon pokemon){
+    /*final url = snapshot.data!["sprites"]["other"]["official-artwork"]["front_default"];
     final hp = snapshot.data!["stats"][0]["base_stat"];
     final attack = snapshot.data!["stats"][1]["base_stat"];
     final defense = snapshot.data!["stats"][2]["base_stat"];
@@ -131,7 +131,7 @@ class _BattlePageState extends State<BattlePage> {
     pokemon.hp = hp;
     pokemon.attack = attack;
     pokemon.def = defense;
-    pokemon.speed = speed;
+    pokemon.speed = speed;*/
 
     return Column(
       children: [ Container(
@@ -145,7 +145,7 @@ class _BattlePageState extends State<BattlePage> {
           child: FadeInImage.memoryNetwork(
             fadeInDuration: const Duration(seconds: 1),
             placeholder: kTransparentImage,
-            image: url,
+            image: pokemon.img!,
             height: 200,
             width: 200,
             fit: BoxFit.fill,
@@ -241,7 +241,8 @@ class _BattlePageState extends State<BattlePage> {
                               ),
                             );
                           } else{
-                            return createPokemon(context, snapshot, pokeFirst);
+                            pokeFirst = Pokemon.fromApi(snapshot);
+                            return createPokemon(context, pokeFirst);
                           }
                       }
                     },
@@ -276,7 +277,8 @@ class _BattlePageState extends State<BattlePage> {
                               ),
                             );
                           } else{
-                            return createPokemon(context, snapshot, pokeSecondary);
+                            pokeSecondary = Pokemon.fromApi(snapshot);
+                            return createPokemon(context, pokeSecondary);
                           }
                       }
                     },
