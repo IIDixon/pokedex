@@ -223,7 +223,7 @@ class _BattlePageState extends State<BattlePage> {
             Padding(
               padding: const EdgeInsets.only(top: 10,bottom: 10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   FutureBuilder(
                     future: getPokemonFirst(),
@@ -232,8 +232,8 @@ class _BattlePageState extends State<BattlePage> {
                         case ConnectionState.waiting:
                         case ConnectionState.none:
                           return Container(
-                            width: 150,
-                            height: 150,
+                            width: 100,
+                            height: 100,
                             alignment: Alignment.center,
                             child: CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.primary),
