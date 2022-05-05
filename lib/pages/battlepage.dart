@@ -6,6 +6,9 @@ import 'package:flutter/widgets.dart';
 import 'package:pokedex/models/pokemon.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_mobx/flutter_mobx.dart';
+
+import '../models/battle.dart';
 
 class BattlePage extends StatefulWidget {
   BattlePage({Key? key}) : super(key: key);
@@ -22,7 +25,7 @@ class _BattlePageState extends State<BattlePage> {
   final search = "https://pokeapi.co/api/v2/pokemon/";
   String? namePokemonFirst;
   String? namePokemonSecondary;
-  String log = '';
+  Battle battle = Battle();
 
   late List<String?> listPoke = [namePokemonFirst,namePokemonSecondary];
 
@@ -67,23 +70,32 @@ class _BattlePageState extends State<BattlePage> {
     });
   }
 
-  void goBattle(Pokemon pokemon) async{
-    await Future.delayed(const Duration(seconds: 3));
-    setState(() {
-      log += "Mew causou XX de dano ao pokemon MewTwo\n\n";
-    });
+  void goBattle(Pokemon pokeOne, Pokemon pokeTwo) async{
+    battle.log = '';
+    battle.log += "Combate iniciado\n";
+    battle.log += "Pontos de Vida ${pokeOne.name} - ${pokeOne.hp}\n";
+    battle.log += "Pontos de Vida ${pokeTwo.name} - ${pokeTwo.hp}\n\n";
+    while(pokeOne.hp! > 0 && pokeTwo.hp! > 0){
+      await Future.delayed(const Duration(seconds: 5));
+      battle.log += "${pokeOne.name} ataca ${pokeTwo.name} causando ${battle.damagePhase(pokeOne, pokeTwo)} pontos de dano\n";
+      battle.log += "${pokeTwo.name} agora está com ${pokeTwo.hp} pontos de vida\n\n";
 
-    await Future.delayed(const Duration(seconds: 3));
-    setState((){
-      log += "MewTwo causou YY de dano ao pokemon Mew\n\n";
-      log += "MewTwo causou YY de dano ao pokemon Mew\n\n";
-      log += "MewTwo causou YY de dano ao pokemon Mew\n\n";
-      log += "MewTwo causou YY de dano ao pokemon Mew\n\n";
-      log += "MewTwo causou YY de dano ao pokemon Mew\n\n";
-      log += "MewTwo causou YY de dano ao pokemon Mew\n\n";
-      log += "MewTwo causou YY de dano ao pokemon Mew\n\n";
-      log += "MewTwo causou 20 de dano ao pokemon Mew\n\n";
-    });
+      if(pokeTwo.hp! <= 0){
+        battle.log += "${pokeTwo.name} teve seus pontos de vida reduzidos a 0\n";
+        battle.log += "${pokeOne.name} venceu o combate";
+        break;
+      }
+
+      await Future.delayed(const Duration(seconds: 5));
+      battle.log += "${pokeTwo.name} ataca ${pokeOne.name} causando ${battle.damagePhase(pokeTwo, pokeOne)} pontos de dano\n";
+      battle.log += "${pokeOne.name} agora está com ${pokeOne.hp} pontos de vida\n\n";
+
+      if(pokeOne.hp! <= 0){
+        battle.log += "${pokeOne.name} teve seus pontos de vida reduzidos a 0\n";
+        battle.log += "${pokeTwo.name} venceu o combate";
+        break;
+      }
+    }
   }
 
   Widget createTextField(BuildContext context, TextEditingController searchcontroller, int id){
@@ -164,7 +176,7 @@ class _BattlePageState extends State<BattlePage> {
         Row(
           children: [
             const Text("HP - ", style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),),
-            Text("${pokemon.hp}",style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.end,)
+            Observer(builder: (_)=>Text("${pokemon.hp}",style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.end,),)
           ],
         ),
         Row(
@@ -306,7 +318,8 @@ class _BattlePageState extends State<BattlePage> {
             ),
             ElevatedButton(
               onPressed: (){
-                goBattle(pokeFirst);
+                pokeFirst.hp != null && pokeSecondary.hp != null ? goBattle(pokeFirst, pokeSecondary) :
+                  const AlertDialog(title: Text('Iniciar Batalha'), content: Text('Selecione corretamente os pokemons'),);
               },
               child: const Text("Go Battle"),
             ),
@@ -327,7 +340,7 @@ class _BattlePageState extends State<BattlePage> {
                           reverse: true,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(log),
+                            child: Observer(builder: (_) => Text(battle.log, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
                           ),
                         ),
                       ),
