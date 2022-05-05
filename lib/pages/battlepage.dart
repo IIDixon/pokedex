@@ -75,26 +75,29 @@ class _BattlePageState extends State<BattlePage> {
     battle.log += "Combate iniciado\n";
     battle.log += "Pontos de Vida ${pokeOne.name} - ${pokeOne.hp}\n";
     battle.log += "Pontos de Vida ${pokeTwo.name} - ${pokeTwo.hp}\n\n";
+    int turno = 1;
     while(pokeOne.hp! > 0 && pokeTwo.hp! > 0){
+      battle.log += "Turno $turno\n";
       await Future.delayed(const Duration(seconds: 5));
       battle.log += "${pokeOne.name} ataca ${pokeTwo.name} causando ${battle.damagePhase(pokeOne, pokeTwo)} pontos de dano\n";
-      battle.log += "${pokeTwo.name} agora está com ${pokeTwo.hp} pontos de vida\n\n";
-
       if(pokeTwo.hp! <= 0){
         battle.log += "${pokeTwo.name} teve seus pontos de vida reduzidos a 0\n";
         battle.log += "${pokeOne.name} venceu o combate";
         break;
+      } else{
+        battle.log += "${pokeTwo.name} agora está com ${pokeTwo.hp} pontos de vida\n\n";
       }
 
       await Future.delayed(const Duration(seconds: 5));
       battle.log += "${pokeTwo.name} ataca ${pokeOne.name} causando ${battle.damagePhase(pokeTwo, pokeOne)} pontos de dano\n";
-      battle.log += "${pokeOne.name} agora está com ${pokeOne.hp} pontos de vida\n\n";
-
       if(pokeOne.hp! <= 0){
         battle.log += "${pokeOne.name} teve seus pontos de vida reduzidos a 0\n";
         battle.log += "${pokeTwo.name} venceu o combate";
         break;
+      }else{
+        battle.log += "${pokeOne.name} agora está com ${pokeOne.hp} pontos de vida\n\n";
       }
+      turno++;
     }
   }
 
