@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
+import 'package:pokedex/models/double_damage_to.dart';
+import 'half_damage_to.dart';
 
 part 'pokemon.g.dart';
 
@@ -35,10 +37,10 @@ abstract class _Pokemon with Store{
   int? def;
   int? attack;
 
-  List<dynamic>? doubleDamageFrom; // Sofre dano duplo de...
-  List<String>? doubleDamageTo; // Causa dano duple em...
-  List<String>? halfDamageFrom; // Sofre metade do dano de...
-  List<String>? halfDamageTo; // Causa metade do dano em...
+  /*List<DoubleDamageFrom>? doubleDamageFrom; // Sofre dano duplo de...*/
+  List<DoubleDamageTo>? doubleDamageTo; // Causa dano duple em...
+  /*List<HalfDamageFrom>? halfDamageFrom; // Sofre metade do dano de...*/
+  List<HalfDamageTo>? halfDamageTo; // Causa metade do dano em...
 
   @observable
   int? hp;

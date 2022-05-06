@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pokedex/models/pokemon_controller.dart';
 import 'package:pokedex/repositories/pokemon_repository.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -60,8 +61,23 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void decPoke(){
-    poke.decrement(10);
+  Future<Map> getType(String type) async{
+    http.Response response;
+
+    response = await http.get(Uri.parse("https://pokeapi.co/api/v2/type/$type"));
+    return json.decode(response.body);
+  }
+
+  void decPoke() async{
+    //poke.decrement(10);
+    final pokeController = PokemonController.fromJson(await getType(poke.element!));
+    pokeController.addList(poke);
+    /*for(DoubleDamageFrom double in poke.doubleDamageFrom!){
+      print(double.type);
+    }*/
+    print("Causa dano duplo em ${poke.doubleDamageTo}");
+    print("Causa dano reduzido em ${poke.halfDamageTo}");
+    print(poke.element);
   }
 
  Widget createDataPokemon(BuildContext context, Pokemon pokemon){

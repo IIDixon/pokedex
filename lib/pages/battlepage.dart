@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pokedex/models/pokemon.dart';
+import 'package:pokedex/models/pokemon_controller.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -27,6 +28,8 @@ class _BattlePageState extends State<BattlePage> {
   String? namePokemonSecondary;
   Battle battle = Battle();
 
+  late PokemonController pokeController;
+
   late List<String?> listPoke = [namePokemonFirst,namePokemonSecondary];
 
   Pokemon pokeFirst = Pokemon();
@@ -46,21 +49,17 @@ class _BattlePageState extends State<BattlePage> {
     return json.decode(response.body);
   }
 
-/*  void setPokemonFirst(String text) {
-    setState(() {
-      if (text != null && text.isNotEmpty) {
-        namePokemonFirst = text;
-      }
-    });
+  Future<Map> getType(String type) async{
+    http.Response response;
+
+    response = await http.get(Uri.parse("https://pokeapi.co/api/v2/type/$type"));
+    return json.decode(response.body);
   }
 
-  void setPokemonSecondary(String text) {
-    setState(() {
-      if (text != null && text.isNotEmpty) {
-        namePokemonSecondary = text;
-      }
-    });
-  }*/
+  void getDamageRelations(Pokemon pokemon) async{
+    pokeController = PokemonController.fromJson(await getType(pokemon.element!));
+    pokeController.addList(pokemon);
+  }
 
   void setPokemon(String text, int id){
     setState(() {
@@ -258,6 +257,7 @@ class _BattlePageState extends State<BattlePage> {
                             );
                           } else{
                             pokeFirst = Pokemon.fromApi(snapshot);
+                            getDamageRelations(pokeFirst);
                             return createPokemon(context, pokeFirst);
                           }
                       }
@@ -294,6 +294,7 @@ class _BattlePageState extends State<BattlePage> {
                             );
                           } else{
                             pokeSecondary = Pokemon.fromApi(snapshot);
+                            getDamageRelations(pokeSecondary);
                             return createPokemon(context, pokeSecondary);
                           }
                       }
@@ -343,7 +344,7 @@ class _BattlePageState extends State<BattlePage> {
                           reverse: true,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Observer(builder: (_) => Text(battle.log.toUpperCase(), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),)),
+                            child: Observer(builder: (_) => Text(battle.log.toUpperCase(), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold), textAlign: TextAlign.start,)),
                           ),
                         ),
                       ),
