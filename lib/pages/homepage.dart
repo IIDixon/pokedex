@@ -91,16 +91,16 @@ class _HomePageState extends State<HomePage> {
                     width: 2,
                   )
                 ),
-                height: 300,
+                height: 270,
                 child: FadeInImage.memoryNetwork(
                   placeholder: kTransparentImage,
                   image: pokemon.img!,
-                  height: 300,
+                  height: 270,
                   fit: BoxFit.fill,
                 )
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 8, bottom: 8),
+                padding: const EdgeInsets.only(top: 5, bottom: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                           border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1)),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(3),
                           child: Text(pokemon.name!.toUpperCase(), style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 22,),textAlign: TextAlign.center,),
                         ),
                       ),
@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                 )
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 8, bottom: 8),
+                padding: const EdgeInsets.only(top: 5, bottom: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                           border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1)),
                         ),
                         child: Padding(
-                            padding: const EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(3),
                             child: Text(pokemon.element!.toUpperCase(), style: TextStyle(fontSize: 22, color: Theme.of(context).colorScheme.primary),textAlign: TextAlign.center,),
                         ),
                       ),
