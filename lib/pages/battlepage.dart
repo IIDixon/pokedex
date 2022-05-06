@@ -12,7 +12,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import '../models/battle.dart';
 
 class BattlePage extends StatefulWidget {
-  BattlePage({Key? key}) : super(key: key);
+  const BattlePage({Key? key}) : super(key: key);
 
   @override
   _BattlePageState createState() => _BattlePageState();
@@ -344,7 +344,7 @@ class _BattlePageState extends State<BattlePage> {
                           reverse: true,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Observer(builder: (_) => Text(battle.log.toUpperCase(), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold), textAlign: TextAlign.start,)),
+                            child: Observer(builder: (_) => Text(battle.log.toUpperCase(), style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold), textAlign: TextAlign.start,)),
                           ),
                         ),
                       ),

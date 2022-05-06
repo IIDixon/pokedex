@@ -20,9 +20,9 @@ class PokemonController{
 
   double damageTo(Pokemon pokemonAttack, Pokemon pokemonDefense){
     if(pokemonAttack.doubleDamageTo!.any((element) => element.type == pokemonDefense.element)){ // Verifica se o pokemon atacante causa dano duplo no pokemon defensor
-      return 2;
+      return 1.3; // Causa 30% a mais de dano
     } else if(pokemonAttack.halfDamageTo!.any((element) => element.type == pokemonDefense.element)){ // Verifica se o pokemon atacante causa dano reduzido no pokemon defensor
-      return 1.5;
+      return 0.3; // Causa 30% a menos de dano
     } else {
       return 1;
     }

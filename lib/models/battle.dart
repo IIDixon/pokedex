@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:pokedex/models/pokemon.dart';
 import 'package:mobx/mobx.dart';
+import 'package:pokedex/models/pokemon_controller.dart';
 
 part 'battle.g.dart';
 
@@ -15,13 +16,17 @@ abstract class _Battle with Store{
 
   @action
   int damagePhase(Pokemon pokeAttack, Pokemon pokeDefense) {
-    // Status max = 120
+
+    PokemonController pokemonController = PokemonController();
 
     // Cálculo da % de dano defendida
     double def = 1 - (pokeDefense.def! / (pokeDefense.def! + 25));
 
     // Calculo do dano causado reduzindo de acordo com a defesa
     int totalDamage = (pokeAttack.attack! * def).toInt();
+
+    // Verifica o multiplicador de dano de acordo com o a fraqueza e resistência do pokemon Defensor
+    totalDamage = (totalDamage * pokemonController.damageTo(pokeAttack, pokeDefense)).toInt();
 
     // Calculo da % de chance de causar dano crítico de acordo com a velocidade do pokemon atacante
     double chanceCriticalStrike = pokeAttack.speed! / (pokeAttack.speed! + 50);
