@@ -29,7 +29,7 @@ abstract class _Battle with Store{
     // Calculo de esquiva
     // Caso o pokemon defensor tenha mais velocidade que o pokemon atacante, o defensor absorve uma pequena quantidade do dano recebido
     if(pokeDefense.speed! > pokeAttack.speed!){
-      totalDamage -= (totalDamage * ((pokeDefense.speed! - pokeAttack.speed!) ~/ 50)).toInt(); // Operador '~/' faz com que seja retornado apenas a parte inteira da divisão
+      totalDamage -= (totalDamage * ((pokeDefense.speed! - pokeAttack.speed!) / 200)).toInt(); // Operador '~/' faz com que seja retornado apenas a parte inteira da divisão
     }
 
     if(random.nextDouble() <= chanceCriticalStrike){

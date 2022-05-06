@@ -77,7 +77,7 @@ class _BattlePageState extends State<BattlePage> {
     battle.log += "Pontos de Vida ${pokeTwo.name} - ${pokeTwo.hp}.\n\n";
     int turno = 1;
     while(pokeOne.hp! > 0 && pokeTwo.hp! > 0){
-      battle.log += "Turno $turno\n";
+      battle.log += "///////////////////////////////////////////////////\nTurno $turno\n";
       await Future.delayed(const Duration(seconds: 5));
       battle.log += "${pokeOne.name} ataca ${pokeTwo.name} causando ${battle.damagePhase(pokeOne, pokeTwo)} pontos de dano.\n";
       if(pokeTwo.hp! <= 0){
@@ -343,7 +343,7 @@ class _BattlePageState extends State<BattlePage> {
                           reverse: true,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Observer(builder: (_) => Text(battle.log.toUpperCase(), style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
+                            child: Observer(builder: (_) => Text(battle.log.toUpperCase(), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),)),
                           ),
                         ),
                       ),
