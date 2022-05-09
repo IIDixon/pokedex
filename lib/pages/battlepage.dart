@@ -20,7 +20,6 @@ class BattlePage extends StatefulWidget {
 
 class _BattlePageState extends State<BattlePage> {
 
-  final logController = TextEditingController();
   final search1Controller = TextEditingController();
   final search2Controller = TextEditingController();
   final search = "https://pokeapi.co/api/v2/pokemon/";
@@ -151,7 +150,7 @@ class _BattlePageState extends State<BattlePage> {
                 fadeInDuration: const Duration(seconds: 1),
                 placeholder: kTransparentImage,
                 image: pokemon.img!,
-                height: MediaQuery.of(context).size.height*0.4,
+                //height: MediaQuery.of(context).size.height*0.4,
                 //width: 150,
               fit: BoxFit.fill,
             ),
@@ -159,6 +158,7 @@ class _BattlePageState extends State<BattlePage> {
           Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Row(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 const Expanded(flex: 1,child: Text("Name ", style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),)),
                 Expanded(
@@ -176,6 +176,7 @@ class _BattlePageState extends State<BattlePage> {
           Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Row(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 const Expanded(flex: 1,child: Text("HP ", style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),)),
                 Expanded(
@@ -193,6 +194,7 @@ class _BattlePageState extends State<BattlePage> {
           Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Row(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 const Expanded(flex: 1,child: Text("Speed ", style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),)),
                 Expanded(flex: 2,
@@ -209,6 +211,7 @@ class _BattlePageState extends State<BattlePage> {
           Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Row(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 const Expanded(flex: 1,child: Text("Attack " ,style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),)),
                 Expanded(flex: 2,
@@ -225,6 +228,7 @@ class _BattlePageState extends State<BattlePage> {
           Padding(
             padding: const EdgeInsets.only(top: 4),
             child: Row(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 const Expanded(flex: 1, child: Text("Defense ", style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),)),
                 Expanded(flex: 2,
@@ -274,8 +278,8 @@ class _BattlePageState extends State<BattlePage> {
                         case ConnectionState.waiting:
                         case ConnectionState.none:
                           return Container(
-                            width: 100,
-                            height: 100,
+                            width: MediaQuery.of(context).size.width*0.4,
+                            height: MediaQuery.of(context).size.height*0.4,
                             alignment: Alignment.center,
                             child: CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.primary),
@@ -285,8 +289,8 @@ class _BattlePageState extends State<BattlePage> {
                         default:
                           if(snapshot.hasError){
                             return Container(
-                              width: 100,
-                              height: 100,
+                              width: MediaQuery.of(context).size.width*0.4,
+                              height: MediaQuery.of(context).size.height*0.4,
                               alignment: Alignment.center,
                               child: Column(
                                 children: const [
@@ -346,10 +350,7 @@ class _BattlePageState extends State<BattlePage> {
             Padding(
               padding: const EdgeInsets.all(5),
               child: ElevatedButton(
-                onPressed: (){
-                  pokeFirst.hp != null && pokeSecondary.hp != null ? goBattle(pokeFirst, pokeSecondary) :
-                    const AlertDialog(title: Text('Iniciar Batalha'), content: Text('Selecione corretamente os pokemons'),);
-                },
+                onPressed: (){goBattle(pokeFirst, pokeSecondary);},
                 child: const Text("Go Battle"),
               ),
             ),
