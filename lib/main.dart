@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
   int indexNow = 0;
   final List<Widget> listWidgets = [
     const HomePage(),
-    BattlePage()
+    const BattlePage()
   ];
 
   void onTabTapped(int index){

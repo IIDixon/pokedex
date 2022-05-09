@@ -134,18 +134,6 @@ class _BattlePageState extends State<BattlePage> {
   }
 
   Widget createPokemon(BuildContext context, Pokemon pokemon){
-    /*final url = snapshot.data!["sprites"]["other"]["official-artwork"]["front_default"];
-    final hp = snapshot.data!["stats"][0]["base_stat"];
-    final attack = snapshot.data!["stats"][1]["base_stat"];
-    final defense = snapshot.data!["stats"][2]["base_stat"];
-    final speed = snapshot.data!["stats"][5]["base_stat"];
-    String name = snapshot.data!["name"];
-
-    pokemon.name = name;
-    pokemon.hp = hp;
-    pokemon.attack = attack;
-    pokemon.def = defense;
-    pokemon.speed = speed;*/
 
     return Column(
       children: [ Container(
@@ -199,7 +187,7 @@ class _BattlePageState extends State<BattlePage> {
             Text("${pokemon.def}", style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.end,)
           ],
         ),
-    ]
+      ],
     );
   }
 
@@ -299,23 +287,6 @@ class _BattlePageState extends State<BattlePage> {
                           }
                       }
                     },
-                    /*child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                            color: Colors.green,
-                            width: 2,
-                          )
-                      ),
-                      child: FadeInImage.memoryNetwork(
-                        fadeInDuration: const Duration(seconds: 2),
-                        placeholder: kTransparentImage,
-                        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
-                        height: 200,
-                        width: 150,
-                        fit: BoxFit.fill,
-                      )
-                    ),*/
                   ),
                 ],
               ),
