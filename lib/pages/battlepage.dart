@@ -134,60 +134,112 @@ class _BattlePageState extends State<BattlePage> {
   }
 
   Widget createPokemon(BuildContext context, Pokemon pokemon){
-
-    return Column(
-      children: [ Container(
-          decoration: BoxDecoration(
+    return Container(
+      width: 200,
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
               color: Colors.white,
               border: Border.all(
                 color: Theme.of(context).colorScheme.primary,
                 width: 2,
               )
+            ),
+            child: FadeInImage.memoryNetwork(
+                fadeInDuration: const Duration(seconds: 1),
+                placeholder: kTransparentImage,
+                image: pokemon.img!,
+                height: 200,
+                //width: 150,
+              fit: BoxFit.fill,
+            ),
           ),
-          child: FadeInImage.memoryNetwork(
-            fadeInDuration: const Duration(seconds: 1),
-            placeholder: kTransparentImage,
-            image: pokemon.img!,
-            height: 200,
-            width: 150,
-            fit: BoxFit.fill,
-          )
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Row(
+              children: [
+                const Expanded(flex: 1,child: Text("Name ", style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),)),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.primary)),
+                    ),
+                      child: Text(pokemon.name!.toUpperCase(),style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary),textAlign: TextAlign.center,),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Row(
+              children: [
+                const Expanded(flex: 1,child: Text("HP ", style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),)),
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.primary),),
+                    ),
+                      child: Observer(builder: (_)=>Text("${pokemon.hp}",style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.center,),)
+                  ),
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Row(
+              children: [
+                const Expanded(flex: 1,child: Text("Speed ", style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),)),
+                Expanded(flex: 2,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.primary))
+                      ),
+                        child: Text("${pokemon.speed}", style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.center,)
+                    )
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Row(
+              children: [
+                const Expanded(flex: 1,child: Text("Attack " ,style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),)),
+                Expanded(flex: 2,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.primary))
+                      ),
+                        child: Text("${pokemon.attack}", style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.center,)
+                    )
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Row(
+              children: [
+                const Expanded(flex: 1, child: Text("Defense ", style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),)),
+                Expanded(flex: 2,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.primary))
+                      ),
+                        child: Text("${pokemon.def}", style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.center,)
+                    )
+                )
+              ],
+            ),
+          ),
+        ],
       ),
-        Row(
-          children: [
-            const Text("Name - ", style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),),
-            Container(
-              decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1)),
-              ),
-                child: Text("${pokemon.name}",style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary),textAlign: TextAlign.end,)),
-          ],
-        ),
-        Row(
-          children: [
-            const Text("HP - ", style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),),
-            Observer(builder: (_)=>Text("${pokemon.hp}",style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.end,),)
-          ],
-        ),
-        Row(
-          children: [
-            const Text("Speed - ", style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),),
-            Text("${pokemon.speed}", style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.end,)
-          ],
-        ),
-        Row(
-          children: [
-            const Text("Attack - " ,style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),),
-            Text("${pokemon.attack}", style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.end,)
-          ],
-        ),
-        Row(
-          children: [
-            const Text("Defense - ", style: TextStyle(fontSize: 18, color: Colors.deepPurpleAccent),),
-            Text("${pokemon.def}", style: TextStyle(fontSize: 18, color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.end,)
-          ],
-        ),
-      ],
     );
   }
 
