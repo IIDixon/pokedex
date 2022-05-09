@@ -134,8 +134,8 @@ class _BattlePageState extends State<BattlePage> {
   }
 
   Widget createPokemon(BuildContext context, Pokemon pokemon){
-    return Container(
-      width: 200,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width*0.4,
       child: Column(
         children: [
           Container(
@@ -151,7 +151,7 @@ class _BattlePageState extends State<BattlePage> {
                 fadeInDuration: const Duration(seconds: 1),
                 placeholder: kTransparentImage,
                 image: pokemon.img!,
-                height: 200,
+                height: MediaQuery.of(context).size.height*0.4,
                 //width: 150,
               fit: BoxFit.fill,
             ),
@@ -343,12 +343,15 @@ class _BattlePageState extends State<BattlePage> {
                 ],
               ),
             ),
-            ElevatedButton(
-              onPressed: (){
-                pokeFirst.hp != null && pokeSecondary.hp != null ? goBattle(pokeFirst, pokeSecondary) :
-                  const AlertDialog(title: Text('Iniciar Batalha'), content: Text('Selecione corretamente os pokemons'),);
-              },
-              child: const Text("Go Battle"),
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: ElevatedButton(
+                onPressed: (){
+                  pokeFirst.hp != null && pokeSecondary.hp != null ? goBattle(pokeFirst, pokeSecondary) :
+                    const AlertDialog(title: Text('Iniciar Batalha'), content: Text('Selecione corretamente os pokemons'),);
+                },
+                child: const Text("Go Battle"),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 14),
@@ -357,7 +360,7 @@ class _BattlePageState extends State<BattlePage> {
                   children: [
                     Expanded(
                       child: Container(
-                        height: 150,
+                        height: MediaQuery.of(context).size.height*0.3,
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: Theme.of(context).colorScheme.primary,
