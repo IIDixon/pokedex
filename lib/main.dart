@@ -54,6 +54,7 @@ class _MyAppState extends State<MyApp> {
           child: listWidgets[indexNow],
         ),
         bottomNavigationBar: BottomNavigationBar(
+          unselectedItemColor: Colors.black,
           selectedItemColor: Colors.white,
           backgroundColor: Colors.deepPurple,
           onTap: onTabTapped,

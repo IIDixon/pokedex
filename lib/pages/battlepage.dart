@@ -278,8 +278,8 @@ class _BattlePageState extends State<BattlePage> {
                         case ConnectionState.waiting:
                         case ConnectionState.none:
                           return Container(
-                            width: MediaQuery.of(context).size.width*0.4,
-                            height: MediaQuery.of(context).size.height*0.4,
+                            width: MediaQuery.of(context).size.width*0.3,
+                            height: MediaQuery.of(context).size.height*0.3,
                             alignment: Alignment.center,
                             child: CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.primary),
@@ -289,8 +289,8 @@ class _BattlePageState extends State<BattlePage> {
                         default:
                           if(snapshot.hasError){
                             return Container(
-                              width: MediaQuery.of(context).size.width*0.4,
-                              height: MediaQuery.of(context).size.height*0.4,
+                              width: MediaQuery.of(context).size.width*0.3,
+                              height: MediaQuery.of(context).size.height*0.3,
                               alignment: Alignment.center,
                               child: Column(
                                 children: const [
@@ -315,8 +315,8 @@ class _BattlePageState extends State<BattlePage> {
                         case ConnectionState.waiting:
                         case ConnectionState.none:
                           return Container(
-                            width: 100,
-                            height: 100,
+                            width: MediaQuery.of(context).size.width*0.3,
+                            height: MediaQuery.of(context).size.height*0.3,
                             alignment: Alignment.center,
                             child: CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.primary),
@@ -326,8 +326,8 @@ class _BattlePageState extends State<BattlePage> {
                         default:
                           if(snapshot.hasError){
                             return Container(
-                              width: 100,
-                              height: 100,
+                              width: MediaQuery.of(context).size.width*0.3,
+                              height: MediaQuery.of(context).size.height*0.3,
                               alignment: Alignment.center,
                               child: Column(
                                 children: const [
@@ -361,7 +361,7 @@ class _BattlePageState extends State<BattlePage> {
                   children: [
                     Expanded(
                       child: Container(
-                        height: MediaQuery.of(context).size.height*0.3,
+                        height: MediaQuery.of(context).size.height*0.18,
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: Theme.of(context).colorScheme.primary,

@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   final PokemonRepository pokeRepository = PokemonRepository();
   final searchController = TextEditingController();
   final search = "https://pokeapi.co/api/v2/pokemon/";
-  late String namePokemon;
+  String? namePokemon;
   Pokemon poke = Pokemon();
 
   final random = Random();
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     } else{
       response = await http.get(Uri.parse(search + namePokemon!));
     }*/
-    response = await http.get(Uri.parse(search + namePokemon));
+    response = await http.get(Uri.parse(search + namePokemon!));
     return json.decode(response.body);
   }
 
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       if(text != null && text.isNotEmpty){
         namePokemon = text;
-        pokeRepository.savePokemon(namePokemon);
+        //pokeRepository.savePokemon(namePokemon);
       }
     });
   }
@@ -304,10 +304,6 @@ class _HomePageState extends State<HomePage> {
                     }
                   }
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(onPressed: decPoke, child: const Text('Decrement HP'),),
               ),
             ],
           ),
